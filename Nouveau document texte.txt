@@ -1,0 +1,4 @@
+npm start
+localhost:3000/books
+
+https://www.mynotepaper.com/nodejs-simple-crud-with-expressjs-and-mysql
