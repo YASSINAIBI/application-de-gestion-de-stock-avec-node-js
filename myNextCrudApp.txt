@@ -1,1 +1,0 @@
-http://mfikri.com/en/blog/nodejs-mysql-crud
