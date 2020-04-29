@@ -23,6 +23,7 @@
                 <li class="nav-pill active">
                     <a class="nav-link">Rayon</a>
                 </li>
+                <a class="nav-link btn-secondary" href="/home">GO TO HOME</a>
                 <li class="nav-pill ml-auto">
                     <a class="nav-link active" href="/rayon/addR">Add Rayon</a>
                 </li>
@@ -47,8 +48,8 @@
                     <td><%= data[i].rayon_name %></td>
                     <td><%= data[i].rayon_product %></td>
                     <td>
-                        <a class="btn btn-success edit" href="../books/editrayon/<%=data[i].id%>">Edit</a>
-                        <a class="btn btn-danger delete" onclick="return alert('Are You sure?')" href="../books/deleterayon/<%=data[i].id%>">Delete</a>
+                        <a class="btn btn-success edit" href="../rayon/editR/<%=data[i].id%>">Edit</a>
+                        <a class="btn btn-danger delete" onclick="return alert('Are You sure?')" href="../rayon/delete/<%=data[i].id%>">Delete</a>
                     </td>
                 </tr>
             <% } %>

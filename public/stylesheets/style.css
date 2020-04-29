@@ -1,8 +1,16 @@
+*{
+  box-sizing: border-box;
+}
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #00B7FF;
+.Products-management .card{
+  margin: 20px auto 10px;
+}
+
+.Products-management .h1{
+  color: cadetblue;
 }

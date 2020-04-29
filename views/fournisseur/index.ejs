@@ -21,11 +21,11 @@
         <div class="card-header">
             <ul class="nav nav-pills w-100">
                 <li class="nav-pill active">
-                    <a class="nav-link">products</a>
+                    <a class="nav-link">fournisseur</a>
                 </li>
                 <a class="nav-link btn-secondary" href="/home">GO TO HOME</a>
                 <li class="nav-pill ml-auto">
-                    <a class="nav-link active" href="/books/add">Add product</a>
+                    <a class="nav-link active" href="/fournisseur/addF">Add fournisseur</a>
                 </li>
             </ul>
         </div>
@@ -36,20 +36,22 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">product_name</th>
-                    <th scope="col">unit_coast</th>
-                    <th width="200px">modify or delete products</th>
+                    <th scope="col">name</th>
+                    <th scope="col">phone</th>
+                    <th scope="col">email</th>
+                    <th width="200px">modify or delete fournisseur</th>
                 </tr>
             </thead>
             <tbody>
             <% for(var i = 0; i< data.length; i++) { %>
                 <tr>
                     <th scope="row"><%= (i+1) %></th>
-                    <td><%= data[i].product_name %></td>
-                    <td><%= data[i].unit_coast %></td>
+                    <td><%= data[i].name %></td>
+                    <td><%= data[i].phone %></td>
+                    <td><%= data[i].email %></td>
                     <td>
-                        <a class="btn btn-success edit" href="../books/edit/<%=data[i].id%>">Edit</a>
-                        <a class="btn btn-danger delete" onclick="return alert('Are You sure?')" href="../books/delete/<%=data[i].id%>">Delete</a>
+                        <a class="btn btn-success edit" href="../fournisseur/editF/<%=data[i].id%>">Edit</a>
+                        <a class="btn btn-danger delete" onclick="return alert('Are You sure?')" href="../fournisseur/delete/<%=data[i].id%>">Delete</a>
                     </td>
                 </tr>
             <% } %>
