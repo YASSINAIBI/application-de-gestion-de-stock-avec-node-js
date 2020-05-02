@@ -38,6 +38,7 @@
                     <th scope="col">#</th>
                     <th scope="col">product_name</th>
                     <th scope="col">unit_coast</th>
+                    <th scope="col">rayon_N</th>
                     <th width="200px">modify or delete products</th>
                 </tr>
             </thead>
@@ -47,6 +48,7 @@
                     <th scope="row"><%= (i+1) %></th>
                     <td><%= data[i].product_name %></td>
                     <td><%= data[i].unit_coast %></td>
+                    <td><%= data[i].rayon_N %></td>
                     <td>
                         <a class="btn btn-success edit" href="../books/edit/<%=data[i].id%>">Edit</a>
                         <a class="btn btn-danger delete" onclick="return alert('Are You sure?')" href="../books/delete/<%=data[i].id%>">Delete</a>

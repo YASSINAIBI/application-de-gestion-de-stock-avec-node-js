@@ -4,7 +4,7 @@ var dbConn  = require('../lib/db');
 
 // display books page
 router.get('/', function(req, res, next) {
-    var sql = "CREATE TABLE if not exists products (id INT AUTO_INCREMENT PRIMARY KEY, product_name varchar(50), unit_coast float, created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, updated_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)";
+    var sql = "CREATE TABLE if not exists products (id INT AUTO_INCREMENT PRIMARY KEY, product_name varchar(50), unit_coast float, rayon_N INT, created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, updated_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)";
 
     dbConn.query(sql, function (err, result) {
         if (err) throw err;
@@ -29,18 +29,21 @@ router.get('/add', function(req, res, next) {
     res.render('books/add', {
         product_name: '',
         unit_coast: '',
+        rayon_N: ''
     })
 })
-
 // add a new book
 router.post('/add', function(req, res, next) {
 
     let product_name = req.body.product_name;
     let unit_coast = req.body.unit_coast;
+    let rayon_number = req.body.rayon_N;
+
+
 
     let errors = false;
 
-    if(product_name.length === 0 || unit_coast.length === 0){
+    if(product_name.length === 0 || unit_coast.length === 0 || rayon_number.length === 0 ){
         errors = true;
 
         // set flash message
@@ -48,7 +51,8 @@ router.post('/add', function(req, res, next) {
         // render to add.ejs with flash message
         res.render('books/add', {
             product_name: product_name,
-            unit_coast: unit_coast
+            unit_coast: unit_coast,
+            rayon_N: rayon_number
         })
     }
 
@@ -57,7 +61,8 @@ router.post('/add', function(req, res, next) {
 
         var form_data = {
             product_name: product_name,
-            unit_coast: unit_coast
+            unit_coast: unit_coast,
+            rayon_N: rayon_number
         }
 
         // insert query
@@ -69,7 +74,8 @@ router.post('/add', function(req, res, next) {
                 // render to add.ejs
                 res.render('books/add', {
                     product_name: form_data.product_name,
-                    unit_coast: form_data.unit_coast
+                    unit_coast: form_data.unit_coast,
+                    rayon_N: form_data.rayon_number
                 })
             } else {
                 req.flash('success', 'product successfully added');
@@ -99,7 +105,8 @@ router.get('/edit/(:id)', function(req, res, next) {
                 title: 'Edit Book',
                 id: rows[0].id,
                 product_name: rows[0].product_name,
-                unit_coast: rows[0].unit_coast
+                unit_coast: rows[0].unit_coast,
+                rayon_N: rows[0].rayon_number
             })
         }
     })
@@ -111,9 +118,10 @@ router.post('/update/:id', function(req, res, next) {
     let id = req.params.id;
     let product_name = req.body.product_name;
     let unit_coast = req.body.unit_coast;
+    let rayon_number = req.body.rayon_N;
     let errors = false;
 
-    if(product_name.length === 0 || unit_coast.length === 0) {
+    if(product_name.length === 0 || unit_coast.length === 0 || rayon_number.length === 0) {
         errors = true;
 
         // set flash message
@@ -122,7 +130,8 @@ router.post('/update/:id', function(req, res, next) {
         res.render('books/edit', {
             id: req.params.id,
             product_name: product_name,
-            unit_coast: unit_coast
+            unit_coast: unit_coast,
+            rayon_N: rayon_number
         })
     }
 
@@ -131,7 +140,8 @@ router.post('/update/:id', function(req, res, next) {
 
         var form_data = {
             product_name: product_name,
-            unit_coast: unit_coast
+            unit_coast: unit_coast,
+            rayon_N: rayon_number
         }
         // update query
         dbConn.query('UPDATE products SET ? WHERE id = ' + id, form_data, function(err, result) {
@@ -143,7 +153,8 @@ router.post('/update/:id', function(req, res, next) {
                 res.render('books/edit', {
                     id: req.params.id,
                     product_name: form_data.product_name,
-                    unit_coast: form_data.unit_coast
+                    unit_coast: form_data.unit_coast,
+                    rayon_N: form_data.rayon_number
                 })
             } else {
                 req.flash('success', 'product successfully updated');

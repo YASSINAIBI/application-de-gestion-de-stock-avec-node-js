@@ -5,7 +5,7 @@ var dbConn  = require('../lib/db');
 // rayon section
 // display rayon page
 router.get('/', function(req, res, next) {
-    var sql = "CREATE TABLE if not exists rayon (id INT AUTO_INCREMENT PRIMARY KEY, rayon_name varchar(50), rayon_product varchar(50), created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, updated_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)";
+    var sql = "CREATE TABLE if not exists rayon (id INT AUTO_INCREMENT PRIMARY KEY, rayon_name INT, rayon_product varchar(50), created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, updated_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)";
 
     dbConn.query(sql, function (err, result) {
         if (err) throw err;
@@ -47,7 +47,7 @@ router.post('/addR', function(req, res, next) {
         // set flash message
         req.flash('error', "Please enter rayonName and rayonProduct");
         // render to add.ejs with flash message
-        res.render('books/add', {
+        res.render('rayon/add-rayon', {
             rayon_name: rayon_name,
             rayon_product: rayon_product
         })
@@ -159,8 +159,11 @@ router.post('/update/:id', function(req, res, next) {
 router.get('/delete/(:id)', function(req, res, next) {
 
     let id = req.params.id;
+    let rayon_name = req.body.rayon_name;
 
-    dbConn.query('DELETE FROM rayon WHERE id = ' + id, function(err, result) {
+        // rayon.rayon_name = products.rayon_N
+var sql = "DELETE products, rayon FROM products inner join rayon on rayon.rayon_name = products.rayon_N";
+            dbConn.query(sql,[1, 1], function(err, result, fields) {
         //if(err) throw err
         if (err) {
             // set flash message
@@ -173,6 +176,6 @@ router.get('/delete/(:id)', function(req, res, next) {
             // redirect to books page
             res.redirect('/rayon')
         }
-    })
-})
+    });
+    });
 module.exports = router;
