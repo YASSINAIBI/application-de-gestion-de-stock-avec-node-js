@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Books</title>
+    <title>products</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
@@ -25,7 +25,7 @@
                 </li>
                 <a class="nav-link btn-secondary" href="/home">GO TO HOME</a>
                 <li class="nav-pill ml-auto">
-                    <a class="nav-link active" href="/books/add">Add product</a>
+                    <a class="nav-link active" href="/products/add">Add product</a>
                 </li>
             </ul>
         </div>
@@ -50,8 +50,8 @@
                     <td><%= data[i].unit_coast %></td>
                     <td><%= data[i].rayon_N %></td>
                     <td>
-                        <a class="btn btn-success edit" href="../books/edit/<%=data[i].id%>">Edit</a>
-                        <a class="btn btn-danger delete" onclick="return alert('Are You sure?')" href="../books/delete/<%=data[i].id%>">Delete</a>
+                        <a class="btn btn-success edit" href="../products/edit/<%=data[i].id%>">Edit</a>
+                        <a class="btn btn-danger delete" onclick="return alert('Are You sure?')" href="../products/delete/<%=data[i].id%>">Delete</a>
                     </td>
                 </tr>
             <% } %>

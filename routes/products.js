@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var dbConn  = require('../lib/db');
 
-// display books page
+// display products page
 router.get('/', function(req, res, next) {
     var sql = "CREATE TABLE if not exists products (id INT AUTO_INCREMENT PRIMARY KEY, product_name varchar(50), unit_coast float, rayon_N INT, created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, updated_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)";
 
@@ -14,11 +14,11 @@ router.get('/', function(req, res, next) {
     dbConn.query('SELECT * FROM products ORDER BY id desc',function(err,rows)  {
         if(err) {
             req.flash('error', err);
-            // render to views/books/index.ejs
-            res.render('books',{data:''});
+            // render to views/products/index.ejs
+            res.render('products',{data:''});
         } else {
-            // render to views/books/index.ejs
-            res.render('books',{data:rows});
+            // render to views/products/index.ejs
+            res.render('products',{data:rows});
         }
     });
 });
@@ -26,7 +26,7 @@ router.get('/', function(req, res, next) {
 // display add book page
 router.get('/add', function(req, res, next) {
     // render to add.ejs
-    res.render('books/add', {
+    res.render('products/add', {
         product_name: '',
         unit_coast: '',
         rayon_N: ''
@@ -49,7 +49,7 @@ router.post('/add', function(req, res, next) {
         // set flash message
         req.flash('error', "Please enter productname and unit coast");
         // render to add.ejs with flash message
-        res.render('books/add', {
+        res.render('products/add', {
             product_name: product_name,
             unit_coast: unit_coast,
             rayon_N: rayon_number
@@ -72,14 +72,14 @@ router.post('/add', function(req, res, next) {
                 req.flash('error', err)
 
                 // render to add.ejs
-                res.render('books/add', {
+                res.render('products/add', {
                     product_name: form_data.product_name,
                     unit_coast: form_data.unit_coast,
                     rayon_N: form_data.rayon_number
                 })
             } else {
                 req.flash('success', 'product successfully added');
-                res.redirect('/books');
+                res.redirect('/products');
             }
         })
     }
@@ -96,12 +96,12 @@ router.get('/edit/(:id)', function(req, res, next) {
         // if user not found
         if (rows.length <= 0) {
             req.flash('error', 'product not found with id = ' + id)
-            res.redirect('/books')
+            res.redirect('/products')
         }
         // if book found
         else {
             // render to edit.ejs
-            res.render('books/edit', {
+            res.render('products/edit', {
                 title: 'Edit Book',
                 id: rows[0].id,
                 product_name: rows[0].product_name,
@@ -127,7 +127,7 @@ router.post('/update/:id', function(req, res, next) {
         // set flash message
         req.flash('error', "Please enter product and unitCoast");
         // render to add.ejs with flash message
-        res.render('books/edit', {
+        res.render('products/edit', {
             id: req.params.id,
             product_name: product_name,
             unit_coast: unit_coast,
@@ -150,7 +150,7 @@ router.post('/update/:id', function(req, res, next) {
                 // set flash message
                 req.flash('error', err)
                 // render to edit.ejs
-                res.render('books/edit', {
+                res.render('products/edit', {
                     id: req.params.id,
                     product_name: form_data.product_name,
                     unit_coast: form_data.unit_coast,
@@ -158,7 +158,7 @@ router.post('/update/:id', function(req, res, next) {
                 })
             } else {
                 req.flash('success', 'product successfully updated');
-                res.redirect('/books');
+                res.redirect('/products');
             }
         })
     }
@@ -174,13 +174,13 @@ router.get('/delete/(:id)', function(req, res, next) {
         if (err) {
             // set flash message
             req.flash('error', err)
-            // redirect to books page
-            res.redirect('/books')
+            // redirect to products page
+            res.redirect('/products')
         } else {
             // set flash message
             req.flash('success', 'product successfully deleted! ID = ' + id)
-            // redirect to books page
-            res.redirect('/books')
+            // redirect to products page
+            res.redirect('/products')
         }
     })
 })

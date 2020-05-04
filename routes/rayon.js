@@ -15,10 +15,10 @@ router.get('/', function(req, res, next) {
     dbConn.query('SELECT * FROM rayon ORDER BY id desc',function(err,rows)     {
         if(err) {
             req.flash('error', err);
-            // render to views/books/index.ejs
+            // render to views/products/index.ejs
             res.render('rayon',{data:''});
         } else {
-            // render to views/books/index.ejs
+            // render to views/products/index.ejs
             res.render('rayon',{data:rows});
         }
     });
@@ -168,12 +168,12 @@ var sql = "DELETE products, rayon FROM products inner join rayon on rayon.rayon_
         if (err) {
             // set flash message
             req.flash('error', err)
-            // redirect to books page
+            // redirect to products page
             res.redirect('/rayon')
         } else {
             // set flash message
             req.flash('success', 'rayon successfully deleted! ID = ' + id)
-            // redirect to books page
+            // redirect to products page
             res.redirect('/rayon')
         }
     });
